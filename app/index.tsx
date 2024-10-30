@@ -1,4 +1,6 @@
+import { auth } from '@/scripts/firebase-config';
 import { useRouter } from 'expo-router';
+import { signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useState } from 'react'
 import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "react-native";
 
@@ -17,6 +19,19 @@ export default function Index() {
             setErrorLogin("");
             login();
         }
+    }
+
+    const login = () => {
+        signInWithEmailAndPassword(auth, email, password)
+        .then((userCredential) => {
+            //Signed in
+            const user = userCredential.user;
+            // ...
+        })
+        .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+        })
     }
 
     return (
