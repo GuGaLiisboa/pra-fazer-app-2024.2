@@ -4,6 +4,21 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "reac
 
 export default function Index() {
     const router = useRouter();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [errorLogin, setErrorLogin] = useState("");
+
+    const validarCampos = () => {
+        if (email == "") {
+            setErrorLogin("Informe o E-mail.");
+        } else if (password == "") {
+            setErrorLogin("Informe uma Senha");
+        } else {
+            setErrorLogin("");
+            login();
+        }
+    }
+
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../assets/images/logo_pra_fazer.png')} />
@@ -16,8 +31,8 @@ export default function Index() {
                 style={styles.input}
                 placeholder='E-mail'
                 placeholderTextColor={"#7D7D7D"}
-                // value={email}
-                // onChangeText={setEmail}
+            // value={email}
+            // onChangeText={setEmail}
             />
 
             <TextInput
@@ -25,8 +40,8 @@ export default function Index() {
                 placeholder='Senha'
                 placeholderTextColor={"#7D7D7D"}
                 secureTextEntry={true}
-                // value={password}
-                // onChangeText={setPassword}
+            // value={password}
+            // onChangeText={setPassword}
             />
 
             <TouchableOpacity style={styles.button}
