@@ -6,15 +6,15 @@ import { StyleSheet, View, Text, TextInput, TouchableOpacity, Image } from "reac
 
 export default function Index() {
     const router = useRouter();
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorLogin, setErrorLogin] = useState("");
+    const [email,setEmail] = useState("");
+    const [password,setPassword] = useState("");
+    const [errorLogin,setErrorLogin] = useState("");
 
     const validarCampos = () => {
         if (email == "") {
-            setErrorLogin("Informe o E-mail.");
+            setErrorLogin("Informe seu e-mail.");
         } else if (password == "") {
-            setErrorLogin("Informe uma Senha");
+            setErrorLogin("Informe sua senha");
         } else {
             setErrorLogin("");
             login();
@@ -22,46 +22,55 @@ export default function Index() {
     }
 
     const login = () => {
+
         signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
-            //Signed in
-            const user = userCredential.user;
-            // ...
+          // Signed in 
+          const user = userCredential.user;
+          setEmail("");
+          setPassword("");
+          setErrorLogin("");
+          router.push("/internas/tasks");
+            
         })
         .catch((error) => {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        })
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          setErrorLogin (errorMessage)
+        });
+
+
     }
+
+
+
 
     return (
         <View style={styles.container}>
             <Image style={styles.logo} source={require('../assets/images/logo_pra_fazer.png')} />
 
-            {/* {errorLogin != null && (
+            {errorLogin != null && (
                 <Text style={styles.alert}>{errorLogin}</Text>
-            )} */}
+            )}
 
             <TextInput
                 style={styles.input}
                 placeholder='E-mail'
-                placeholderTextColor={"#7D7D7D"}
-            // value={email}
-            // onChangeText={setEmail}
+                value={email}
+                onChangeText={setEmail}
             />
 
             <TextInput
                 style={styles.input}
                 placeholder='Senha'
-                placeholderTextColor={"#7D7D7D"}
                 secureTextEntry={true}
-            // value={password}
-            // onChangeText={setPassword}
+                value={password}
+                onChangeText={setPassword}
             />
 
             <TouchableOpacity style={styles.button}
-                // onPress={validate}
-                onPress={() => router.push('/internas/tasks')}
+                onPress={validarCampos}
+                
             >
                 <Text style={styles.textButton}>Entrar</Text>
             </TouchableOpacity>

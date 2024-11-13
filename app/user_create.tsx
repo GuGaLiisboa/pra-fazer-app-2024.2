@@ -7,7 +7,6 @@ import { ref, set } from 'firebase/database';
 
 export default function CreateUser() {
     const router = useRouter();
-
     const [nome, setNome] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -20,6 +19,7 @@ export default function CreateUser() {
             setErrorCreateUser("Informe um E-Mail");
         } else if (password == "") {
             setErrorCreateUser("Informe uma Senha");
+
         } else {
             setErrorCreateUser("");
         }
@@ -30,10 +30,10 @@ export default function CreateUser() {
             .then((userCredential) => {
                 // Signed up 
                 const user = userCredential.user;
-                set(ref(db, 'users/' + user.uid), {
+                set(ref(db, 'user/' + user.uid), {
                     nome: nome,
                     email: email
-                });
+                })
                 router.push('/');
             })
             .catch((error) => {
@@ -80,6 +80,7 @@ export default function CreateUser() {
             <TouchableOpacity
                 style={styles.button}
                 onPress={validarCampos}
+                onPressIn={createUser}
             >
                 <Text style={styles.textButton}>Criar usuário</Text>
             </TouchableOpacity>

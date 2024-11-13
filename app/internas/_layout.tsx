@@ -1,46 +1,53 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import React from "react";
 
 export default function Layout() {
     return (
         <Tabs
             screenOptions={{
-                // COR DO CABEÇALHO
+                //Cor do cabeçalho
                 headerStyle: { backgroundColor: "#F60"},
-                // COR DA TAB BAR
+                //Cor da tab bar
                 tabBarStyle: {backgroundColor: "#070A52"},
+                //Centraliza o título no cabeçalho
                 headerTitleAlign: 'center',
-                // COR DO TITULO DA PAGE
+                //Cor do texto cabeçalho
                 headerTintColor: '#FFF',
-                tabBarActiveTintColor: '#F60'
+                //Define a cor do menu ativo na tab bar
+                tabBarActiveTintColor: "#F60",
+                //Cor do ícone inativa na tab bar
+                tabBarInactiveTintColor: "#FFF"
             }}
         >
             <Tabs.Screen name="tasks" options={{
-                headerTitle: "Tarefas",
-                tabBarLabel: "Tarefas",
-                tabBarIcon: ({ color }) => (
-                    <MaterialCommunityIcons
-                    name="check-circle-outline" color={
-                    color } size={32} />
-                )
-            }} />
+            headerTitle: "Tarefas", 
+            tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons
+            name="check-circle-outline"
+            color={color}
+            size={32}
+      />
+    )
+  }}
+/>
             <Tabs.Screen name="user" options={{
                 headerTitle: "Dados do Usuário",
-                tabBarLabel: "Dados do Usuário",
                 tabBarIcon: ({ color }) => (
                     <MaterialCommunityIcons
-                    name="account" color={
-                    color } size={32} />
-                )
+                    name="account"
+                    color={color}
+                    size={32}
+                    />)
             }} />
             <Tabs.Screen name="about" options={{
                 headerTitle: "Sobre o aplicativo",
-                tabBarLabel: "Sobre o Aplicativo",
                 tabBarIcon: ({ color }) => (
                     <MaterialCommunityIcons
-                    name="information-outline" color={
-                    color } size={32} />
-                )
+                    name="information-outline"
+                    color={color}
+                    size={32}
+                    />)
             }} />
         </Tabs>
     );
